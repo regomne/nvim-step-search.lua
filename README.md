@@ -19,12 +19,6 @@ Progressive log search plugin for Neovim. Search a large log file by multiple ke
 
 ## Installation
 
-### [packer.nvim](https://github.com/wbthomason/packer.nvim)
-
-```lua
-use("regomne/nvim-step-search.lua")
-```
-
 ### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
@@ -34,10 +28,6 @@ use("regomne/nvim-step-search.lua")
 ### Local (development)
 
 ```lua
--- packer
-use("~/path/to/step-search.nvim")
-
--- lazy
 { dir = "~/path/to/step-search.nvim" }
 ```
 
