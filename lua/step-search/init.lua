@@ -47,7 +47,7 @@ function M.setup_keymaps(prefix)
   vim.keymap.set("x", prefix .. "f", function()
     local text = get_visual_selection()
     if text ~= "" then
-      search.search(vim.fn.escape(text, "\\/"))
+      search.search("\\V" .. vim.fn.escape(text, "\\"))
     end
   end, { desc = "StepSearch: search selected text" })
 

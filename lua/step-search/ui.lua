@@ -120,6 +120,11 @@ function M.highlight_patterns(bufnr, patterns)
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 
   for i, line in ipairs(lines) do
+    -- Sanitize: strip NUL bytes to prevent "Using a Blob as a String" errors
+    if type(line) ~= "string" then
+      line = tostring(line) or ""
+    end
+    line = line:gsub("%z", "")
     for pi, pattern in ipairs(patterns) do
       local hl_group = highlight_groups[((pi - 1) % #highlight_groups) + 1]
       -- Find all match positions

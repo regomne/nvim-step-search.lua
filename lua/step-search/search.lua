@@ -10,6 +10,19 @@ local M = {}
 -- }
 local states = {}
 
+--- Sanitize a line: ensure it's a string and strip NUL bytes
+--- nvim_buf_get_lines may return strings with embedded NUL (\0),
+--- which Vimscript interprets as Blob, causing "Using a Blob as a String" errors.
+---@param line any
+---@return string
+local function sanitize_line(line)
+  if type(line) ~= "string" then
+    line = tostring(line) or ""
+  end
+  -- Remove NUL bytes that cause Vimscript Blob conversion
+  return line:gsub("%z", "")
+end
+
 --- Get or create search state for a source buffer
 ---@param source_bufnr number
 ---@return table state
@@ -70,6 +83,7 @@ function M.search(pattern)
   local new_count = 0
 
   for i, line in ipairs(lines) do
+    line = sanitize_line(line)
     if not state.matched_lnums[i] then
       if vim.fn.match(line, pattern) >= 0 then
         state.matched_lnums[i] = true
