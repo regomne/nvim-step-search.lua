@@ -2,6 +2,10 @@
 
 Progressive log search plugin for Neovim. Search a large log file by multiple keywords incrementally — results are merged and displayed in order of original line numbers.
 
+## Demo
+
+![usage](assets/usage.gif)
+
 ## Features
 
 - **Progressive search**: search keyword1, then keyword2, results merge automatically sorted by line number
